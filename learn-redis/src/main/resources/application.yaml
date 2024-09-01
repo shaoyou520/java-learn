@@ -1,0 +1,20 @@
+spring:
+  data:
+    redis:
+      cluster:
+        nodes:
+          - master:30370
+          - master:30371
+          - master:30372
+          - master:30373
+          - master:30374
+          - master:30375
+      password: 123456
+      lettuce:
+        pool:
+          enabled: true
+          max-active: 100
+          max-idle: 10
+        cluster:
+          refresh:
+            adaptive: true
