@@ -1,5 +1,7 @@
 package org.example.controller;
 
+import jakarta.websocket.server.PathParam;
+import org.example.entry.Message;
 import org.example.entry.User;
 import org.example.service.IRedisService;
 import org.example.respond.Result;
@@ -13,6 +15,9 @@ public class UserController {
     @Autowired
     private IRedisService<User> redisService;
 
+    @Autowired
+    private IRedisService<Message> msgRedisService;
+
     /**
      * @param user user param
      * @return user
@@ -23,6 +28,19 @@ public class UserController {
         user = redisService.get(String.valueOf(user.getId()));
         return Result.success(user);
     }
+
+    /**
+     *
+     * @param key
+     * @param msg
+     * @return
+     */
+    @PostMapping("addset/{key}")
+    public Result<Message> addSet(@PathVariable("key") String key, @RequestBody Message msg) {
+        msgRedisService.addSet(key, msg, (double)msg.getScore());
+        return Result.success(msg);
+    }
+
 
     /**
      * @return user list

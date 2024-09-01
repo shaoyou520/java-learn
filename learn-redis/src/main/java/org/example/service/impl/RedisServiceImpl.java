@@ -72,6 +72,11 @@ public class RedisServiceImpl<T> implements IRedisService<T> {
     }
 
     @Override
+    public void addSet(String key, T value, Double score) {
+        redisTemplate.opsForSet().add(key, value);
+    }
+
+    @Override
     public Set<T> getSet(String key) {
         return redisTemplate.opsForSet().members(key);
     }
