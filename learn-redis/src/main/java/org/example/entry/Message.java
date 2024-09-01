@@ -9,5 +9,5 @@ public class Message {
     private String content;
     private Integer approvalNum;
     private Integer reviewNum;
-    private Float score;
+    private Double score;
 }
